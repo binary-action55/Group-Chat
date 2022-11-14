@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/signUp.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <main class="signUpFormContainer">
+        <form class="signUpForm" id="signUpForm" method="POST">
+            <section class="formErrorToast" id="formErrorToast"></section>
+            <label for="nameInput">Name</label>
+            <input type="text" id="nameInput" name="name">
+            <label for="emailInput">Email</label>
+            <input type="email" id="emailInput" name="email">
+            <label for="passwordInput">password</label>
+            <input type="password" id="passwordInput" name="password">
+            <label for="phoneNumberInput">Phone Number</label>
+            <input type="text" id="phoneNumberInput" name="phoneNumber" pattern="[7-9]{1}[0-9]{9}"
+                title="Phone number with 7-9 and remaing 9 digit with 0-9">
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script src="./js/singUp.js"></script>
+</body>
+
+</html>
