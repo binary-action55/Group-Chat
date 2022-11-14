@@ -5,11 +5,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/login.css">
     <title>Document</title>
 </head>
 
 <body>
-    <h1>login</h1>
+    <main class="loginFormContainer">
+        <form class="loginForm" id="loginForm" method="POST">
+            <section class="formErrorToast" id="formErrorToast"></section>
+            <label for="emailInput">Email</label>
+            <input type="email" id="emailInput" name="email">
+            <label for="passwordInput">password</label>
+            <input type="password" id="passwordInput" name="password">
+            <button type="submit">Submit</button>
+            <button id="signUpButton">Sign Up Instead</button>
+        </form>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script src="./js/login.js"></script>
 </body>
 
 </html>

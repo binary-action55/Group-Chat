@@ -2,11 +2,11 @@ const path = require('path');
 const rootDirectory = require('../utils/rootDirectory');
 const User = require(path.join(rootDirectory,'model','user'));
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const SEQUELIZE_UNIQUE_ERROR = 'SequelizeUniqueConstraintError';
 
 module.exports.signUp = async (req,res,next) =>{
-    console.log(req.body);
     if(req.body.name==null||
         req.body.email==null||
         req.body.password==null||
@@ -35,6 +35,34 @@ module.exports.signUp = async (req,res,next) =>{
         if(err.name===SEQUELIZE_UNIQUE_ERROR){
             return res.status(400).json({message:'Email is already registered',isUniqueEmail:false});
         }
+        res.status(500).json({message:err});
+    } 
+}
+
+module.exports.login = async (req,res,next) =>{
+    if(req.body.email==null||
+        req.body.password==null
+    ){
+        return res.status(400).json({message:'Bad Input One or more Inputs are undefined or null'});
+    }
+
+    const email = req.body.email;
+    const password = req.body.password;
+
+    try{
+        const user = await User.findAll({where:{email}});
+        if(user.length===0){
+            return res.status(400).json({message:'user not found',isValidUser:false});
+        }
+        const match = await bcrypt.compare(password,user[0].password);
+        if(!match)
+            return res.status(400).json({message:'user not authorized',isValidUser:true,isValidPassword:false})
+        
+        const token = jwt.sign({email:user[0].email},process.env.JWT_SECRET);       
+        return res.status(200).json({success:true,message:'User Authorized',isValidUser:true,isValidPassword:true ,token});
+    }
+    catch(err){
+        console.log(err);
         res.status(500).json({message:err});
     } 
 }

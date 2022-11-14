@@ -4,14 +4,14 @@ body {
     width: 100vw;
 }
 
-.signUpFormContainer {
+.loginFormContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
 }
 
-.signUpForm {
+.loginForm {
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
@@ -25,6 +25,6 @@ body {
     font-size: 2rem;
 }
 
-#loginButton {
+#signUpButton {
     margin-top: 1rem;
 }

@@ -1,10 +1,10 @@
 const express = require('express');
 const path = require('path');
+
 const bodyParser = require('body-parser');
 const rootDirectory = require('./utils/rootDirectory');
 const sequelize = require(path.join(rootDirectory,'utils','database'));
 const cors = require('cors');
-const { json } = require('body-parser');
 
 //Routes
 const userRoutes = require(path.join(rootDirectory,'routes','user'));
