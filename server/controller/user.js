@@ -58,7 +58,7 @@ module.exports.login = async (req,res,next) =>{
         if(!match)
             return res.status(400).json({message:'user not authorized',isValidUser:true,isValidPassword:false})
         
-        const token = jwt.sign({email:user[0].email},process.env.JWT_SECRET);       
+        const token = jwt.sign({id:user[0].id},process.env.JWT_SECRET);       
         return res.status(200).json({success:true,message:'User Authorized',isValidUser:true,isValidPassword:true ,token});
     }
     catch(err){

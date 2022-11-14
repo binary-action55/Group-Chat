@@ -1,13 +1,26 @@
+* {
+    box-sizing: border-box;
+}
+
+
 html,
 body {
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     position: relative;
+    margin: 0;
 }
 
 .chatPageHeader {
     width: 100%;
     text-align: center;
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+#logoutButton {
+    float: right;
+    margin: 1rem;
 }
 
 .chatPageFooter {
