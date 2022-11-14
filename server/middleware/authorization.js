@@ -8,11 +8,11 @@ const User = require(path.join(rootDirectory,'model','user'));
 const JSON_WEB_TOKEN_ERROR = 'JsonWebTokenError';
 
 module.exports.authorize = async (req,res,next) =>{
-    if(req.body.token==null){
-        return res.status(401).json({message:'Bad Input'});
+    if(req.headers.authorization==null){
+        return res.status(401).json({message:'Not Authorized'});
     }
 
-    const token = req.body.token;
+    const token = req.headers.authorization;
     try{
         const body = jwt.verify(token,process.env.JWT_SECRET);
         const user = await User.findByPk(body.id);
