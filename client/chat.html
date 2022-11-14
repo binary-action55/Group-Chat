@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/chat.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <header class="chatPageHeader">
+        <h1> Chat App </h1>
+    </header>
+    <main class="chatPageMainBody">
+        <section class="chatMessageSection">
+            <article class="chatMessageItem dark">
+                jack : hello
+            </article>
+            <article class="chatMessageItem light">
+                james : hello
+            </article>
+        </section>
+    </main>
+    <footer class="chatPageFooter">
+        <form method="POST" id="chatMessageForm">
+            <input type="text" id="chatMessageInput" name="chatMessage">
+            <button type="submit">Send</button>
+        </form>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script src="./js/chat.js"></script>
+</body>
+
+</html>
