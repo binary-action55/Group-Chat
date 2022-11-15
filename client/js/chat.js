@@ -30,6 +30,7 @@ logoutButton.addEventListener('click',()=>{
 
 document.addEventListener('DOMContentLoaded',async ()=>{
     createChatItemList();
+    setInterval(createChatItemList,1000);
 })
 
 chatMessageForm.addEventListener('submit',async (e)=>{

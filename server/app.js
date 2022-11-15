@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const rootDirectory = require('./utils/rootDirectory');
 const sequelize = require(path.join(rootDirectory,'utils','database'));
 const cors = require('cors');
+const compression = require('compression');
 
 //Routes
 const userRoutes = require(path.join(rootDirectory,'routes','user'));
@@ -24,6 +25,7 @@ const jsonParser = bodyParser.json();
 const urlencodedParser = bodyParser.urlencoded({extended:false});
 
 app.use(cors());
+app.use(compression());
 
 app.use('/user',jsonParser,userRoutes);
 app.use('/chat',jsonParser,userAuthorization.authorize,chatRoutes);
