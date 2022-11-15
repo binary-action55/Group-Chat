@@ -2,6 +2,7 @@ const path = require('path');
 const User = require('../model/user');
 const rootDirectory = require('../utils/rootDirectory');
 const Chat = require(path.join(rootDirectory,'model','chat'));
+const Sequelize = require('sequelize');
 
 module.exports.postChat = async (req,res,next)=>{
     if(req.body.message==null){
@@ -25,7 +26,23 @@ module.exports.postChat = async (req,res,next)=>{
 module.exports.getAllChat = async (req,res,next)=>{
     try{
         let chatList = [];
-        const chats = await Chat.findAll();
+        const timeOffset = req.query.timeOffset || new Date(0).toISOString(); 
+        const config = {
+            where:{
+                createdAt:{
+                    [Sequelize.Op.gt]:timeOffset,
+                }
+            },
+        };
+        const limit = +req.query.limit;
+        if(limit!==-1 && limit!=null){
+            config.limit = limit;
+            config.order = [['createdAt','DESC']];
+        }
+        const chats = await Chat.findAll(config);
+        if(limit!==-1 && limit!=null){
+            chats.reverse();
+        }
         for(let chat of chats){
             const author = await User.findByPk(chat.userId);        
             chatList.push({
@@ -33,7 +50,7 @@ module.exports.getAllChat = async (req,res,next)=>{
                 message: `${author.name}: ${chat.message}`,
             });
         }
-        res.status(201).json({success:true,chatList});
+        res.status(200).json({success:true,chatList});
     }
     catch(err){
         console.log(err);

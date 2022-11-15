@@ -48,6 +48,7 @@ body {
 
 .chatPageMainBody {
     width: 100%;
+    height: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -56,6 +57,8 @@ body {
 
 .chatMessageSection {
     width: 50%;
+    height: 90%;
+    overflow: scroll;
 }
 
 .chatMessageItem {
