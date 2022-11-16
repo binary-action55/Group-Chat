@@ -105,7 +105,7 @@ function switchGroup(groupId,groupName){
     clearInterval(myTimer);
     createGroupNameHeading();
     createChatItemList(10);
-    myTimer = setInterval(createChatItemList,90000);
+    myTimer = setInterval(createChatItemList,2000);
 }
 
 async function leaveGroup(groupId,groupListItem){

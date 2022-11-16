@@ -83,7 +83,7 @@ module.exports.getGroupChat = async (req,res,next)=>{
     }
 }
 
-async function uploadToS3(fileContents,fileName){
+function uploadToS3(fileContents,fileName){
 
     const s3Client = new AWS.S3({
         accessKeyId:process.env.ACCESS_KEY_ID,
