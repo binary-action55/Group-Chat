@@ -2,18 +2,21 @@ const path = require('path');
 const User = require('../model/user');
 const rootDirectory = require('../utils/rootDirectory');
 const Chat = require(path.join(rootDirectory,'model','chat'));
+const Group = require(path.join(rootDirectory,'model','group'));
 const Sequelize = require('sequelize');
 
 module.exports.postChat = async (req,res,next)=>{
-    if(req.body.message==null){
-        return res.json(401).json({message:'Bad Input'});
+    if(req.body.message==null || req.body.groupId==null){
+        return res.status(401).json({message:'Bad Input'});
     }
     
     const message = req.body.message;
     const user = req.body.user;
+    const groupId = +req.body.groupId;
     try{
         const msg = await user.createChat({
             message,
+            groupId,
         });
         res.status(201).json({success:true,message:'post added'});
     }
@@ -23,10 +26,13 @@ module.exports.postChat = async (req,res,next)=>{
     }
 }
 
-module.exports.getAllChat = async (req,res,next)=>{
+module.exports.getGroupChat = async (req,res,next)=>{
+    if(req.query.groupId==null)
+        return res.status(401).json({message:'Bad Input'});
     try{
         let chatList = [];
         const timeOffset = req.query.timeOffset || new Date(0).toISOString(); 
+        const group = await Group.findByPk(+req.query.groupId);
         const config = {
             where:{
                 createdAt:{
@@ -39,12 +45,12 @@ module.exports.getAllChat = async (req,res,next)=>{
             config.limit = limit;
             config.order = [['createdAt','DESC']];
         }
-        const chats = await Chat.findAll(config);
+        const chats = await group.getChats(config);
         if(limit!==-1 && limit!=null){
             chats.reverse();
         }
         for(let chat of chats){
-            const author = await User.findByPk(chat.userId);        
+            const author = await chat.getUser();       
             chatList.push({
                 time:chat.createdAt,
                 message: `${author.name}: ${chat.message}`,

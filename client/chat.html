@@ -15,7 +15,16 @@
         <button class="logoutButton" id="logoutButton">Logout</button>
     </header>
     <main class="chatPageMainBody">
-        <section class="chatMessageSection" id="chatMessageSection">
+        <div class="groupChatView" id="groupChatView">
+            <h3 class="groupNameHeading" id="groupNameHeading"></h3>
+            <section class="chatMessageSection" id="chatMessageSection">
+            </section>
+        </div>
+        <section class="groupListSection" id="groupListSection">
+            <button class="createGroupButton" id="createGroupButton">Create Group</button>
+            <button class="groupListRefreshButton" id="groupListRefreshButton">Refresh Groups</button>
+            <ul class="groupList" id="groupList">
+            </ul>
         </section>
     </main>
     <footer class="chatPageFooter">

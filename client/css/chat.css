@@ -50,13 +50,13 @@ body {
     width: 100%;
     height: 80%;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     margin-bottom: 2rem;
 }
 
 .chatMessageSection {
-    width: 50%;
+    width: 90%;
     height: 90%;
     overflow: scroll;
 }
@@ -71,4 +71,60 @@ body {
 
 .chatMessageItem.light {
     background-color: whitesmoke;
+}
+
+.groupListSection {
+    display: flex;
+    width: 45%;
+    height: 90%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#groupList {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 90%;
+    overflow: scroll;
+}
+
+.groupListItem {
+    width: 100%;
+    text-decoration: none;
+    padding: 2%;
+    background-color: aquamarine;
+    color: darkblue;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.groupListItem:hover,
+.groupListItem:active {
+    background-color: aqua;
+}
+
+.groupNameHeading {
+    margin: 20px;
+    text-align: center;
+}
+
+.groupChatView {
+    width: 45%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.leaveGroupButton:hover {
+    background-color: rebeccapurple;
+}
+
+#groupListRefreshButton {
+    margin: 1rem;
 }

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/group.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <header class="createGroupPageHeader">
+        <span class="createGroupPageHeading">Chat App</span>
+        <button class="logoutButton" id="logoutButton">Logout</button>
+    </header>
+    <main class="createGroupPageMainBody">
+        <form class="createGroupForm" id="createGroupForm">
+            <label for="groupNameInput">Group Name</label>
+            <input type="text" id="groupNameInput" name="groupName" required>
+            <label for="userListInput">Select Participants</label>
+            <select class="userList" id="userListInput" name="userList" multiple>
+            </select>
+            <button type="submit">Create Group</button>
+        </form>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script src="./js/group.js"></script>
+</body>
+
+</html>
