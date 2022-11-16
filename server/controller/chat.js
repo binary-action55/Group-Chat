@@ -13,7 +13,12 @@ module.exports.postChat = async (req,res,next)=>{
     const message = req.body.message;
     const user = req.body.user;
     const groupId = +req.body.groupId;
+
     try{
+        const group = await Group.findByPk(groupId);
+        const userFromGroup = await group.getUsers({where:{id:user.id}});
+        if(userFromGroup.length===0)
+            return res.status(400).json({message:'User not in group'});
         const msg = await user.createChat({
             message,
             groupId,

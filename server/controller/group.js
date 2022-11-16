@@ -97,7 +97,7 @@ module.exports.getUserGroups = async (req,res,next)=>{
         const groupList = [];
         for(let group of groups){
             const memberCount = await group.countUsers();
-            const isAdmin = groups.groupuser.role==='Admin';
+            const isAdmin = group.groupuser.role==='Admin';
             groupList.push({
                 id:group.id,
                 name:group.name,
@@ -136,7 +136,7 @@ module.exports.getEditAddableUsers = async (req,res,next) =>{
     
     const groupId = +req.query.groupId;
     try{
-        const group = Group.findByPk(groupId);
+        const group = await Group.findByPk(groupId);
         const user = req.body.user;
         const groupUsers = await group.getUsers();
         const groupUserIds = groupUsers.map((user)=>user.id);
@@ -160,7 +160,7 @@ module.exports.getEditRemovableUsers = async (req,res,next) =>{
     
     const groupId = +req.query.groupId;
     try{
-        const group = Group.findByPk(groupId);
+        const group = await Group.findByPk(groupId);
         const user = req.body.user;
         const users = await group.getUsers({where:{
             id:{

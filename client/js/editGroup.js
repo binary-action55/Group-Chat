@@ -51,9 +51,10 @@ editGroupForm.addEventListener('submit',async (e)=>{
     const groupName = groupNameInput.value;
     const userIds = [...userListInput.selectedOptions].map(option=>+option.value)
     const removeUserIds = [...removeUserListInput.selectedOptions].map(option=>+option.value);
-    console.log(userIds);
+    const params = new URLSearchParams(window.location.search);
+    const groupId = +params.get('groupId');
     try{
-        const res = await axios.post('http://localhost:3000/group/edit',{groupName,userIds,removeUserIds},{headers:{authorization:token}});
+        const res = await axios.post('http://localhost:3000/group/edit',{groupId,groupName,userIds,removeUserIds},{headers:{authorization:token}});
         window.location.href='./chat.html';
     }
     catch(err){
@@ -62,8 +63,10 @@ editGroupForm.addEventListener('submit',async (e)=>{
 });
 
 document.addEventListener('DOMContentLoaded',async ()=>{
-    const params = new URLSearchParams(window.location.href);
-    const groupId = +params.get(groupId);
+    const params = new URLSearchParams(window.location.search);
+    const groupId = +params.get('groupId');
+    const groupName = params.get('groupName');
+    groupNameInput.value=groupName;
     createAddableUserList(groupId);
     createRemovableUserList(groupId);
 })

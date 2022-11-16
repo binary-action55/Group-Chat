@@ -129,8 +129,10 @@ groupList.addEventListener('click',(e)=>{
         switchGroup(groupId,groupName);
     }
     else if(item.classList.contains('editGroupButton')){
-        const groupId = item.dataset.id;
-        window.location.href=`./editGroup.html?groupId:${groupId}`;
+        const groupListItem = item.parentElement;
+        const groupId = groupListItem.dataset.id;
+        const groupName = groupListItem.dataset.name;
+        window.location.href=`./editGroup.html?groupId=${groupId}&groupName=${groupName}`;
     }
     else if(item.classList.contains('leaveGroupButton')){
         const groupListItem = item.parentElement;

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/group.css">
+    <link rel="stylesheet" href="./css/editGroup.css">
     <title>Document</title>
 </head>
 
@@ -20,10 +20,11 @@
             <input type="text" id="groupNameInput" name="groupName" required>
             <label for="userListInput">Select Participants</label>
             <select class="userList" id="userListInput" name="userList" multiple>
-                <label for="removeUserListInput">Remove Participants</label>
-                <select class="removeUserListInput" id="removeUserListInput" name="removeUserList" multiple>
-                </select>
-                <button type="submit">Edit Group</button>
+            </select>
+            <label for="removeUserListInput">Remove Participants</label>
+            <select class="removeUserListInput" id="removeUserListInput" name="removeUserList" multiple>
+            </select>
+            <button type="submit">Edit Group</button>
         </form>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
