@@ -53,11 +53,15 @@ function createGroupListItem(group){
     item.classList.add('groupListItem');
     item.dataset.id=group.id;
     item.dataset.name=group.name;
+    
     item.innerHTML=`
-    <span class='groupListItemName'>Name:${group.name}</span>
-    <span class='groupListItemMemberCount'>Member Count:${group.memberCount}</span>
-    <button class='leaveGroupButton' id='leaveGroupButton'>Leave Group</button>
+        <span class='groupListItemName'>Name:${group.name}</span>
+        <span class='groupListItemMemberCount'>Member Count:${group.memberCount}</span>
     `;
+    if(group.isAdmin){
+        item.innerHTML+=`<button class='editGroupButton' id='editGroupButton'>Edit Group</button>`;    
+    }
+    item.innerHTML+=`<button class='leaveGroupButton' id='leaveGroupButton'>Leave Group</button>`;
     groupList.appendChild(item);
 }
 
@@ -123,6 +127,10 @@ groupList.addEventListener('click',(e)=>{
         const groupId = item.dataset.id;
         const groupName = item.dataset.name;
         switchGroup(groupId,groupName);
+    }
+    else if(item.classList.contains('editGroupButton')){
+        const groupId = item.dataset.id;
+        window.location.href=`./editGroup.html?groupId:${groupId}`;
     }
     else if(item.classList.contains('leaveGroupButton')){
         const groupListItem = item.parentElement;
