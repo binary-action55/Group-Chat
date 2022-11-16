@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const fileUpload = require('express-fileupload');
 
 const bodyParser = require('body-parser');
 const rootDirectory = require('./utils/rootDirectory');
@@ -29,6 +30,7 @@ const urlencodedParser = bodyParser.urlencoded({extended:false});
 
 app.use(cors());
 app.use(compression());
+app.use(fileUpload());
 
 app.use('/user',jsonParser,userRoutes);
 app.use('/chat',jsonParser,userAuthorization.authorize,chatRoutes);

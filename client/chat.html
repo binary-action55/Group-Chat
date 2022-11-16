@@ -32,6 +32,10 @@
             <input type="text" id="chatMessageInput" name="chatMessage">
             <button type="submit">Send</button>
         </form>
+        <form method="POST" id="fileUploadForm">
+            <input type="file" name="uploadFile" required>
+            <button type="submit" id="fileUploadSubmitButton">Upload</button>
+        </form>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
     <script src="./js/chat.js"></script>

@@ -8,5 +8,6 @@ const chatController = require(path.join(rootDirectory,'controller','chat'));
 
 router.get('/',chatController.getGroupChat);
 router.post('/',chatController.postChat);
+router.post('/uploadFile',chatController.uploadFile);
 
 module.exports = router;

@@ -6,6 +6,7 @@ const createGroupButton  = document.querySelector('#createGroupButton');
 const groupList = document.querySelector('#groupList');
 const groupNameHeading = document.querySelector('#groupNameHeading');
 const groupListRefreshButton = document.querySelector('#groupListRefreshButton');
+const fileUploadForm = document.querySelector('#fileUploadForm');
 
 const CHAT_MESSAGE_LIMIT = 20;
 
@@ -38,7 +39,12 @@ async function createChatItemList(limit=-1){
                 const chatItem = document.createElement('article');
                 chatItem.classList.add('chatMessageItem');
                 chatItem.classList.add('light');
-                chatItem.innerText = chats[i].message;
+                if(chats[i].type==='file'){
+                    chatItem.innerHTML= `<span>${chats[i].author}: <a href=${chats[i].link}>${chats[i].link}</a></span>`;
+                }
+                else{
+                    chatItem.innerText = chats[i].message;
+                }
                 chatMessageSection.appendChild(chatItem);
             }
         }
@@ -117,6 +123,32 @@ async function leaveGroup(groupId,groupListItem){
     }
 }
 
+fileUploadForm.addEventListener('submit',async (e)=>{
+    e.preventDefault();
+    const token = localStorage.getItem('userToken');
+    const {groupId} = JSON.parse(localStorage.getItem('group') || '{}');
+    if(groupId==null){
+        alert('Group not selected');
+        return;
+    }
+    const formData = new FormData(fileUploadForm);
+    formData.append('groupId',groupId);
+    try{
+        const res = await axios.post('http://localhost:3000/chat/uploadFile',formData,{
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                authorization:token,
+            },
+        });
+        fileUploadForm.reset();
+        createChatItemList();
+        alert("file uploaded");
+    }
+    catch(err){
+        console.log(err);
+    }
+})
+
 groupListRefreshButton.addEventListener('click',()=>{
     createGroupItemList();
 })
@@ -161,8 +193,10 @@ chatMessageForm.addEventListener('submit',async (e)=>{
     const message = chatMessageInput.value;
     const token = localStorage.getItem('userToken');
     const {groupId} = JSON.parse(localStorage.getItem('group') || '{}');
-    if(groupId==null)
+    if(groupId==null){
         alert('Group not selected');
+        return;
+    }
     try{
         await axios.post('http://localhost:3000/chat',{message,groupId},{headers:{authorization:token}});
         chatMessageForm.reset();

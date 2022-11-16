@@ -10,10 +10,14 @@ const Chat = sequelize.define('chat',{
         primaryKey: true,
         autoIncrement:true,
     },
-    message:{
+    content:{
         type:Sequelize.STRING,
         allowNull:false,
     },
+    type:{
+        type:Sequelize.STRING,
+        allowNull:false,
+    }
 });
 
 module.exports = Chat;
